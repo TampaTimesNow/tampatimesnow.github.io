@@ -1,248 +1,232 @@
 /* =========================================
-   1. GLOBAL STYLES & RESET
+   1. CORE VARIABLES (Modern Mobile-First)
    ========================================= */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --news-red: #cc0000;
+    --news-black: #1a1a1a;
+    --text-gray: #444;
+    --bg-light: #fdfdfd;
+    --border: #e0e0e0;
+    /* Responsive font sizes using clamp() */
+    --h1-size: clamp(1.8rem, 5vw, 3rem);
+    --body-size: 1.1rem;
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--news-black);
     line-height: 1.6;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: 2.5fr 1fr;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* =========================================
-   2. HEADER & NAVIGATION
+   2. HEADER & MOBILE NAVIGATION (Scrollable)
    ========================================= */
-.top-bar {
-    background: #000;
-    color: #fff;
-    font-size: 11px;
-    padding: 8px 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-}
-
 header {
     background: white;
-    border-bottom: 4px solid #cc0000;
-    padding: 20px 0 10px 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-bar {
+    background: var(--news-black);
+    color: white;
+    font-size: 0.7rem;
     text-align: center;
+    padding: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.logo-container {
+    padding: 15px 0 10px;
+    text-align: center;
+    border-bottom: 4px solid var(--news-red);
 }
 
 .logo {
     font-family: 'Georgia', serif;
-    font-size: 42px;
+    font-size: 2.2rem;
     font-weight: 900;
     font-style: italic;
-    letter-spacing: -2px;
-    color: #1a1a1a;
+    color: var(--news-black);
+    letter-spacing: -1.5px;
 }
 
+/* The Mobile Secret: Horizontal Scrollable Nav */
+nav {
+    background: white;
+    overflow-x: auto; /* Allows side-swiping on mobile */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid var(--border);
+}
+
+nav::-webkit-scrollbar { display: none; } /* Hide scrollbar for clean look */
+
 nav ul {
+    display: inline-flex;
     list-style: none;
-    padding: 15px 0;
-    border-top: 1px solid #eee;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Allows links to wrap on small screens */
+    padding: 10px 15px;
 }
 
 nav ul li {
-    margin: 5px 15px;
+    padding: 0 12px;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #444;
-    font-weight: bold;
-    font-size: 13px;
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
-nav ul li a.active { color: #cc0000; }
+nav ul li a.active { color: var(--news-red); border-bottom: 2px solid var(--news-red); }
 
 /* =========================================
-   3. CONTENT STYLES
+   3. LAYOUT (Grid System)
    ========================================= */
-.breaking-badge {
-    background: #cc0000;
-    color: white;
-    display: inline-block;
-    padding: 4px 12px;
-    font-weight: bold;
-    font-size: 12px;
-    margin-bottom: 15px;
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Default to 1 column for Mobile */
+    gap: 20px;
+    padding: 15px;
 }
 
-.hero h1 {
-    font-family: 'Georgia', serif;
-    font-size: 36px;
-    line-height: 1.1;
-    margin-bottom: 15px;
+/* Only use 2 columns on Desktop */
+@media (min-width: 900px) {
+    .container {
+        grid-template-columns: 2.5fr 1fr;
+        padding: 30px 20px;
+    }
 }
 
+/* =========================================
+   4. CONTENT & TYPOGRAPHY
+   ========================================= */
 .hero-image {
     width: 100%;
-    height: 400px;
-    background-color: #333;
+    aspect-ratio: 16 / 9; /* Perfect mobile ratio */
     background-size: cover;
     background-position: center;
+    border-radius: 4px;
+    position: relative;
     display: flex;
     align-items: flex-end;
-    margin: 20px 0;
 }
 
 .image-overlay {
-    background: rgba(0, 0, 0, 0.75);
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
     color: white;
-    padding: 10px;
+    padding: 15px;
     width: 100%;
-    font-size: 13px;
+    font-size: 0.8rem;
 }
 
-.lead-text {
-    font-size: 19px;
-    margin-bottom: 25px;
-}
-
-.read-more {
-    background: #cc0000;
+.breaking-badge {
+    background: var(--news-red);
     color: white;
-    text-decoration: none;
-    padding: 12px 24px;
+    padding: 2px 8px;
     font-weight: bold;
+    font-size: 0.75rem;
+    margin-bottom: 8px;
     display: inline-block;
 }
 
-/* =========================================
-   4. ARTICLE PAGE SPECIFICS
-   ========================================= */
-.article-headline {
+h1 {
     font-family: 'Georgia', serif;
-    font-size: 40px;
-    line-height: 1.1;
-    margin-bottom: 10px;
+    font-size: var(--h1-size);
+    line-height: 1.15;
+    margin: 10px 0;
 }
 
-.article-subhead {
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.article-meta {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    font-size: 13px;
+.byline {
+    font-size: 0.85rem;
     color: #666;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
 }
 
-.drop-cap {
-    float: left;
-    font-size: 65px;
-    line-height: 55px;
-    padding: 4px 8px 0 0;
-    font-family: 'Georgia', serif;
-    font-weight: bold;
+.lead-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 20px;
 }
 
+.article-body p {
+    font-size: var(--body-size);
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* Big News Quote */
 blockquote {
-    border-left: 5px solid #cc0000;
+    font-family: 'Georgia', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    border-left: 4px solid var(--news-red);
     padding: 20px;
     margin: 30px 0;
-    background: #f9f9f9;
-    font-style: italic;
-    font-size: 20px;
+    background: #fdf2f2;
+}
+
+/* Dropcap for professional look */
+.drop-cap {
+    float: left;
+    font-size: 4rem;
+    line-height: 0.8;
+    padding: 5px 10px 0 0;
+    font-weight: bold;
+    color: var(--news-black);
 }
 
 /* =========================================
-   5. SIDEBAR
+   5. SIDEBAR (Becomes Cards on Mobile)
    ========================================= */
-.sidebar {
-    border-left: 1px solid #ddd;
-    padding-left: 20px;
-}
-
 .sidebar-box {
     background: white;
-    padding: 15px;
+    border: 1px solid var(--border);
+    padding: 20px;
     margin-bottom: 20px;
-    border: 1px solid #eee;
 }
 
 .sidebar-box h3 {
-    font-size: 14px;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    border-bottom: 2px solid #cc0000;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
+    color: var(--news-red);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--news-red);
+    display: inline-block;
 }
+
+.trending-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.rank { font-size: 1.5rem; font-weight: bold; color: #ddd; }
+.trending-item p { font-size: 0.9rem; font-weight: bold; }
 
 /* =========================================
-   6. MOBILE RESPONSIVE OVERRIDES (THE FIX)
+   6. FOOTER
    ========================================= */
-@media (max-width: 768px) {
-    /* 1. Stack the columns */
-    .container, .article-layout {
-        grid-template-columns: 1fr; /* Changes from 2 columns to 1 */
-        padding: 0 15px;
-    }
-
-    /* 2. Adjust Typography for smaller screens */
-    .logo { font-size: 32px; }
-    .hero h1, .article-headline { font-size: 28px; }
-    .article-subhead { font-size: 18px; }
-    .lead-text { font-size: 17px; }
-
-    /* 3. Adjust Images */
-    .hero-image { height: 250px; }
-
-    /* 4. Remove sidebar border since it's now on the bottom */
-    .sidebar {
-        border-left: none;
-        border-top: 1px solid #ddd;
-        padding-left: 0;
-        padding-top: 20px;
-    }
-
-    /* 5. Make Navigation easier to tap */
-    nav ul li {
-        margin: 5px 10px;
-    }
-    
-    nav ul li a {
-        font-size: 11px;
-    }
-
-    /* 6. Fix Drop Cap size for small screens */
-    .drop-cap {
-        font-size: 50px;
-        line-height: 40px;
-    }
-}
-
 footer {
-    background: #1a1a1a;
-    color: #999;
+    background: var(--news-black);
+    color: #888;
     text-align: center;
     padding: 40px 20px;
-    margin-top: 40px;
-    font-size: 12px;
+    font-size: 0.8rem;
 }

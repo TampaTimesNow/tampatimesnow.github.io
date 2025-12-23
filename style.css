@@ -16,8 +16,8 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 2.5fr 1fr; /* Main content vs Sidebar */
-    gap: 40px;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 30px;
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
@@ -38,21 +38,18 @@ body {
 
 header {
     background: white;
-    border-bottom: 4px solid #cc0000; /* Primary News Red */
-    padding: 30px 0 10px 0;
+    border-bottom: 4px solid #cc0000;
+    padding: 20px 0 10px 0;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .logo {
     font-family: 'Georgia', serif;
-    font-size: 52px;
+    font-size: 42px;
     font-weight: 900;
     font-style: italic;
     letter-spacing: -2px;
     color: #1a1a1a;
-    text-transform: none;
-    margin-bottom: 10px;
 }
 
 nav ul {
@@ -60,11 +57,13 @@ nav ul {
     padding: 15px 0;
     border-top: 1px solid #eee;
     margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows links to wrap on small screens */
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
+    margin: 5px 15px;
 }
 
 nav ul li a {
@@ -73,15 +72,12 @@ nav ul li a {
     font-weight: bold;
     font-size: 13px;
     text-transform: uppercase;
-    transition: color 0.2s;
 }
 
-nav ul li a:hover, nav ul li a.active {
-    color: #cc0000;
-}
+nav ul li a.active { color: #cc0000; }
 
 /* =========================================
-   3. COMPONENTS (Badges, Buttons, etc.)
+   3. CONTENT STYLES
    ========================================= */
 .breaking-badge {
     background: #cc0000;
@@ -91,7 +87,37 @@ nav ul li a:hover, nav ul li a.active {
     font-weight: bold;
     font-size: 12px;
     margin-bottom: 15px;
-    border-radius: 2px;
+}
+
+.hero h1 {
+    font-family: 'Georgia', serif;
+    font-size: 36px;
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.hero-image {
+    width: 100%;
+    height: 400px;
+    background-color: #333;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    margin: 20px 0;
+}
+
+.image-overlay {
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 10px;
+    width: 100%;
+    font-size: 13px;
+}
+
+.lead-text {
+    font-size: 19px;
+    margin-bottom: 25px;
 }
 
 .read-more {
@@ -100,212 +126,123 @@ nav ul li a:hover, nav ul li a.active {
     text-decoration: none;
     padding: 12px 24px;
     font-weight: bold;
-    border-radius: 3px;
     display: inline-block;
-    margin-top: 10px;
-    transition: background 0.2s;
-}
-
-.read-more:hover {
-    background: #990000;
 }
 
 /* =========================================
-   4. HOME & SECTION LAYOUTS
+   4. ARTICLE PAGE SPECIFICS
    ========================================= */
-.hero h1 {
-    font-family: 'Georgia', serif;
-    font-size: 42px;
-    line-height: 1.1;
-    margin-bottom: 15px;
-    color: #1a1a1a;
-}
-
-.hero-image {
-    width: 100%;
-    height: 450px;
-    background: #333;
-    display: flex;
-    align-items: flex-end;
-    margin: 20px 0;
-    border: 1px solid #ddd;
-    position: relative;
-}
-
-.image-overlay {
-    background: rgba(0, 0, 0, 0.75);
-    color: white;
-    padding: 15px;
-    width: 100%;
-    font-size: 14px;
-}
-
-.lead-text {
-    font-size: 20px;
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 25px;
-}
-
-/* For Local, Business, etc. */
-.section-header {
-    max-width: 1200px;
-    margin: 30px auto 10px;
-    padding: 0 20px;
-    border-bottom: 2px solid #333;
-}
-
-.article-snippet {
-    padding: 20px 0;
-    border-bottom: 1px solid #eee;
-}
-
-/* =========================================
-   5. ARTICLE PAGE TYPOGRAPHY
-   ========================================= */
-.breadcrumb {
-    font-size: 12px;
-    color: #cc0000;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
 .article-headline {
     font-family: 'Georgia', serif;
-    font-size: 48px;
+    font-size: 40px;
     line-height: 1.1;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .article-subhead {
-    font-size: 22px;
+    font-size: 20px;
     color: #555;
-    margin-bottom: 25px;
-    line-height: 1.4;
-    font-weight: 300;
+    margin-bottom: 20px;
 }
 
 .article-meta {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    padding: 15px 0;
-    margin-bottom: 30px;
-    font-size: 14px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 13px;
     color: #666;
-    display: flex;
-    justify-content: space-between;
 }
 
-/* THE DROP CAP (First letter of article) */
 .drop-cap {
     float: left;
-    font-size: 75px;
-    line-height: 60px;
-    padding-top: 4px;
-    padding-right: 12px;
-    padding-left: 3px;
+    font-size: 65px;
+    line-height: 55px;
+    padding: 4px 8px 0 0;
     font-family: 'Georgia', serif;
     font-weight: bold;
-    color: #1a1a1a;
 }
 
-.article-body p {
-    font-size: 19px;
-    margin-bottom: 25px;
-    color: #222;
-}
-
-/* THE PULL QUOTE / BLOCKQUOTE */
 blockquote {
-    border-left: 6px solid #cc0000;
-    padding: 25px 40px;
-    margin: 40px 0;
+    border-left: 5px solid #cc0000;
+    padding: 20px;
+    margin: 30px 0;
     background: #f9f9f9;
     font-style: italic;
-    font-family: 'Georgia', serif;
-    font-size: 24px;
-    line-height: 1.5;
-    color: #444;
+    font-size: 20px;
 }
 
 /* =========================================
-   6. SIDEBAR WIDGETS
+   5. SIDEBAR
    ========================================= */
 .sidebar {
     border-left: 1px solid #ddd;
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
 .sidebar-box {
     background: white;
+    padding: 15px;
+    margin-bottom: 20px;
     border: 1px solid #eee;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.02);
 }
 
 .sidebar-box h3 {
-    font-size: 16px;
+    font-size: 14px;
     text-transform: uppercase;
     border-bottom: 2px solid #cc0000;
-    padding-bottom: 8px;
-    margin-bottom: 15px;
-}
-
-.trending-item {
-    display: flex;
-    margin-bottom: 15px;
-}
-
-.rank {
-    font-size: 22px;
-    font-weight: bold;
-    color: #ccc;
-    margin-right: 15px;
-}
-
-.weather-preview {
-    background: #e3f2fd; /* Soft blue */
-    border-top: 4px solid #2196f3;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 /* =========================================
-   7. PAGE-SPECIFIC EXTRAS (Weather, Business)
+   6. MOBILE RESPONSIVE OVERRIDES (THE FIX)
    ========================================= */
-.forecast-table {
-    width: 100%;
-    text-align: center;
-    border-collapse: collapse;
-    margin-top: 20px;
+@media (max-width: 768px) {
+    /* 1. Stack the columns */
+    .container, .article-layout {
+        grid-template-columns: 1fr; /* Changes from 2 columns to 1 */
+        padding: 0 15px;
+    }
+
+    /* 2. Adjust Typography for smaller screens */
+    .logo { font-size: 32px; }
+    .hero h1, .article-headline { font-size: 28px; }
+    .article-subhead { font-size: 18px; }
+    .lead-text { font-size: 17px; }
+
+    /* 3. Adjust Images */
+    .hero-image { height: 250px; }
+
+    /* 4. Remove sidebar border since it's now on the bottom */
+    .sidebar {
+        border-left: none;
+        border-top: 1px solid #ddd;
+        padding-left: 0;
+        padding-top: 20px;
+    }
+
+    /* 5. Make Navigation easier to tap */
+    nav ul li {
+        margin: 5px 10px;
+    }
+    
+    nav ul li a {
+        font-size: 11px;
+    }
+
+    /* 6. Fix Drop Cap size for small screens */
+    .drop-cap {
+        font-size: 50px;
+        line-height: 40px;
+    }
 }
 
-.forecast-table th, .forecast-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-.market-ticker {
-    background: #333;
-    color: #00ff00; /* Green stock text */
-    padding: 10px;
-    font-family: monospace;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-/* =========================================
-   8. FOOTER
-   ========================================= */
 footer {
     background: #1a1a1a;
     color: #999;
     text-align: center;
-    padding: 60px 20px;
-    margin-top: 60px;
-}
-
-.footer-content p {
+    padding: 40px 20px;
+    margin-top: 40px;
     font-size: 12px;
-    margin-bottom: 10px;
 }
